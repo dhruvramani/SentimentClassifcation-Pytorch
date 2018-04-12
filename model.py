@@ -42,10 +42,11 @@ class ConvNLP(torch.nn.Module):
 
         return y_pred, classes
 
-
+'''
 class CLSTM(torch.nn.Module):
 
     def __init__(self, voc_size, no_classes):
         super(CLSTM, self).__init__()
         self.voc_size = voc_size
         self.no_classes = no_classes
+'''
