@@ -3,6 +3,17 @@ from torch.autograd import Variable
 from torchtext import data, datasets
 from torchtext.vocab import Vectors, GloVe
 
+'''
+	For Docker, run :
+		pip install torchtext
+		pip install nltk
+		apt-get update --fix-missing && apt-get locales
+		locale-gen en_US.UTF-8
+		export LANG="en_US.UTF-8"
+		export LC_ALL="en_US.UTF-8"
+	
+'''
+
 class SST_Data():
 
     def __init__(self, batch_size=64):
