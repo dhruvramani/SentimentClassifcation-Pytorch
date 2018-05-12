@@ -31,6 +31,9 @@ class SST_Data():
         self.TEXT.build_vocab(self.train, vectors=Vectors('wiki.simple.vec', url=self.url))
         self.LABEL.build_vocab(self.train)
 
+        print('len(TEXT.vocab)', len(self.TEXT.vocab))
+        print('TEXT.vocab.vectors.size()', self.TEXT.vocab.vectors.size())
+
         self.train_iter, self.val_iter, self.test_iter = data.BucketIterator.splits(
             (self.train, self.val, self.test), batch_size=3, device=0)
 
