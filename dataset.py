@@ -25,9 +25,7 @@ class SST_Data():
         self.train, self.val, self.test = datasets.SST.splits(self.TEXT, self.LABEL, 
             fine_grained=True, train_subtrees=True)
 
-        print('train.fields', self.train.fields)
         print('len(train)', len(self.train))
-        print('vars(train[0])', vars(self.train[0]))
 
         self.url = 'https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.simple.vec'
         self.TEXT.build_vocab(self.train, vectors=Vectors('wiki.simple.vec', url=self.url))
@@ -35,6 +33,10 @@ class SST_Data():
 
         self.train_iter, self.val_iter, self.test_iter = data.BucketIterator.splits(
             (self.train, self.val, self.test), batch_size=self.batch_size, device=0)
+
+        batch = next(iter(self.train_iter))
+        print(batch.text)
+        print(batch.label)
 
     def get_data(self, ttype):
         to_iter = {"train" : self.train_iter, "val" : self.val_iter, "test" : self.val_iter}[ttype]
