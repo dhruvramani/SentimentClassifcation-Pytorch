@@ -38,9 +38,9 @@ class SST_Data():
         print('len(TEXT.vocab)', len(self.TEXT.vocab))
         print('TEXT.vocab.vectors.size()', self.TEXT.vocab.vectors.size())
 
-        #self.train_iter, self.val_iter, self.test_iter = datasets.SST.iters(batch_size=4)
+        self.train_iter, _, _ = datasets.SST.iters(batch_size=500)
 
-        print('train[0:batch_size)', [vars(self.train[i]) for i in range(1, 10)])
+        #print('train[0:batch_size)', [vars(self.train[i]) for i in range(1, 10)])
 
         #batch = next(iter(self.train_iter))
         #print(batch.text)
