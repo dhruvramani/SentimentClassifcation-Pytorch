@@ -40,7 +40,7 @@ class SST_Data():
 
         #self.train_iter, self.val_iter, self.test_iter = datasets.SST.iters(batch_size=4)
 
-        print('train[0:batch_size)', [vars(self.train[i]) for i in range(4)])
+        print('train[0:batch_size)', [vars(self.train[i]) for i in range(1, 10)])
 
         #batch = next(iter(self.train_iter))
         #print(batch.text)
