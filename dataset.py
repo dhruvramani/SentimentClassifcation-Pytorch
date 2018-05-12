@@ -25,9 +25,9 @@ class SST_Data():
         self.train, self.val, self.test = datasets.SST.splits(self.TEXT, self.LABEL, 
             fine_grained=True, train_subtrees=True)
 
-        print('train.fields', train.fields)
-        print('len(train)', len(train))
-        print('vars(train[0])', vars(train[0]))
+        print('train.fields', self.train.fields)
+        print('len(train)', len(self.train))
+        print('vars(train[0])', vars(self.train[0]))
 
         self.url = 'https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.simple.vec'
         self.TEXT.build_vocab(self.train, vectors=Vectors('wiki.simple.vec', url=self.url))
