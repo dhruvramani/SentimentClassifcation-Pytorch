@@ -42,9 +42,9 @@ class SST_Data():
 
         #print('train[0:batch_size)', [vars(self.train[i]) for i in range(1, 10)])
 
-        #batch = next(iter(self.train_iter))
-        #print(batch.text)
-        #print(batch.label)
+        batch = next(iter(self.train_iter))
+        print(batch.text)
+        print(batch.label)
 
     def get_data(self, ttype):
         to_iter = {"train" : self.train_iter, "val" : self.val_iter, "test" : self.val_iter}[ttype]
