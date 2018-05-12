@@ -28,10 +28,10 @@ class SST_Data():
         print('len(train)', len(self.train))
 
         f = FastText()
-        self.TEXT.build_vocab(train, vectors=f)
+        self.TEXT.build_vocab(self.train, vectors=f)
         self.TEXT.vocab.extend(f)
-        self.LABEL.build_vocab(train)
-        
+        self.LABEL.build_vocab(self.train)
+
         #self.TEXT.build_vocab(self.train, vectors=[GloVe(name='840B', dim='300'), CharNGram(), FastText()])
         #self.LABEL.build_vocab(self.train)
 
