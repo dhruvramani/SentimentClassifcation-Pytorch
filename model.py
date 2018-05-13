@@ -1,7 +1,7 @@
 import torch
 from dataset import SST_Data
 import torch.nn.functional as F
-from torch.Autograd import Variable
+from torch.autograd import Variable
 
 class ConvNLP(torch.nn.Module):
 
