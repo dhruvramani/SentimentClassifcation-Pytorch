@@ -26,8 +26,7 @@ class SST_Data():
             fine_grained=True, train_subtrees=True)
 
         print('len(train)', len(self.train))
-        print(self.train.fields)
-        print(vars(self.train[0]))
+        print(vars(self.train[0]).text)
 
         f = FastText()
         self.TEXT.build_vocab(self.train, vectors=f)
