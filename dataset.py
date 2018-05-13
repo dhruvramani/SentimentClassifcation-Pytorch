@@ -24,15 +24,10 @@ class SST_Data():
         self.train, self.val, self.test = datasets.SST.splits(self.TEXT, self.LABEL, 
             fine_grained=True, train_subtrees=True)
 
-        print('len(train)', len(self.train))
-
         f = FastText()
         self.TEXT.build_vocab(self.train, vectors=f)
         self.TEXT.vocab.extend(f)
         self.LABEL.build_vocab(self.train)
-
-        print('len(TEXT.vocab)', len(self.TEXT.vocab))
-        print('TEXT.vocab.vectors.size()', self.TEXT.vocab.vectors.size())
 
 
     def get_data(self, ttype):
