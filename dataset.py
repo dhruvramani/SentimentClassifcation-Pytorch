@@ -25,7 +25,6 @@ class SST_Data():
             fine_grained=True, train_subtrees=True)
 
         print('len(train)', len(self.train))
-        print(vars(self.train[0])["text"])
 
         f = FastText()
         self.TEXT.build_vocab(self.train, vectors=f)
@@ -46,18 +45,19 @@ class SST_Data():
         #print(batch.text)
         #print(batch.label)
 
-    def get_data(self, ttype):
-        to_iter = {"train" : self.train_iter, "val" : self.val_iter, "test" : self.val_iter}[ttype]
 
-        for batch in to_iter:
-            X, Y = batch.text, batch.label
-            print(X.size(), Y.size())
-            yield X, Y
+    def get_data(self, ttype):
+        to_iter = {"train" : self.train, "val" : self.val, "test" : self.test}[ttype]
+
+        batches = len(to_iter) / self.batch_size
+        for batch in range(batches - 1):
+            data = [var(to_iter)[i] for i in range(batch * self.batch_size, -1 + (batch + 1) * self.batch_size)]
+            yield data
 
     def get_vocab(self):
         return self.TEXT.vocab
 
 if __name__ == '__main__':
     foo = SST_Data()
-    #X, Y = foo.get_data("train")
-    #print(X.size())
+    data = foo.get_data("train")
+    print(data[0]["text"])
