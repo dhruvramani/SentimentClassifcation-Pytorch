@@ -4,6 +4,10 @@ from torchtext import data, datasets
 from torchtext.vocab import Vectors, GloVe, CharNGram, FastText
 
 '''
+    Stanford Sentiment Treebank—an extension of MR but with train/dev/test splits provided and 
+    fine-grained labels (very positive, positive, neutral, negative, very negative),
+    re-labeled by Socher et al. (2013).
+
 	For Docker, run :
 		pip install torchtext
 		pip install nltk
@@ -28,7 +32,6 @@ class SST_Data():
         self.TEXT.build_vocab(self.train, vectors=f)
         self.TEXT.vocab.extend(f)
         self.LABEL.build_vocab(self.train)
-
 
     def get_data(self, ttype):
         to_iter = {"train" : self.train, "val" : self.val, "test" : self.test}[ttype]
