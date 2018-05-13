@@ -51,7 +51,7 @@ class ConvNLP(torch.nn.Module):
 if __name__ == '__main__':
     dummy = SST_Data()
     data = dummy.get_data("train")
-    data = next(data)[0]
+    data = next(data)[0]["text"]
 
     sentence = Variable(torch.LongTensor(data), requires_grad=False)
     model = ConvNLP(dummy.get_vocab_shape()[0], 5)
