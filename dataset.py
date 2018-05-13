@@ -50,7 +50,7 @@ class SST_Data():
         to_iter = {"train" : self.train, "val" : self.val, "test" : self.test}[ttype]
 
         batches = len(to_iter) / self.batch_size
-        for batch in range(batches - 1):
+        for batch in range(int(batches) - 1):
             data = [var(to_iter)[i] for i in range(batch * self.batch_size, -1 + (batch + 1) * self.batch_size)]
             yield data
 
