@@ -53,6 +53,8 @@ if __name__ == '__main__':
     data = dummy.get_data("train")
     data = next(data)[0]["text"]
 
-    sentence = Variable(torch.LongTensor(data), requires_grad=False)
+    sentence = torch.LongTensor(data)
+    print(sentence)
+    sentence = Variable(sentence, requires_grad=False)
     model = ConvNLP(dummy.get_vocab_shape()[0], 5)
     print(model.forward(sentence))
