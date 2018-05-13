@@ -53,6 +53,7 @@ if __name__ == '__main__':
     data = dummy.get_data("train")
     data = next(data)[0]["text"]
 
+    print(data)
     sentence = torch.LongTensor(data)
     print(sentence)
     sentence = Variable(sentence, requires_grad=False)
