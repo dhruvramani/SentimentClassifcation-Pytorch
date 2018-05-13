@@ -16,7 +16,7 @@ from torchtext.vocab import Vectors, GloVe, CharNGram, FastText
 
 class SST_Data():
 
-    def __init__(self, batch_size=64):
+    def __init__(self, batch_size=128):
         self.batch_size = batch_size
         self.TEXT = data.Field()
         self.LABEL = data.Field(sequential=False)
@@ -31,19 +31,8 @@ class SST_Data():
         self.TEXT.vocab.extend(f)
         self.LABEL.build_vocab(self.train)
 
-        #self.TEXT.build_vocab(self.train, vectors=[GloVe(name='840B', dim='300'), CharNGram(), FastText()])
-        #self.LABEL.build_vocab(self.train)
-
         print('len(TEXT.vocab)', len(self.TEXT.vocab))
         print('TEXT.vocab.vectors.size()', self.TEXT.vocab.vectors.size())
-
-        #self.train_iter, _, _ = datasets.SST.iters(batch_size=700)
-
-        #print('train[0:batch_size)', [vars(self.train[i]) for i in range(1, 10)])
-
-        #batch = next(iter(self.train_iter))
-        #print(batch.text)
-        #print(batch.label)
 
 
     def get_data(self, ttype):
@@ -56,6 +45,9 @@ class SST_Data():
 
     def get_vocab(self):
         return self.TEXT.vocab
+
+    def get_vocab_shape(self):
+        return len(self.TEXT.vocab) ,self.TEXT.vocab.vectors.size()
 
 if __name__ == '__main__':
     foo = SST_Data()
