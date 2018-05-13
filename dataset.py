@@ -51,7 +51,7 @@ class SST_Data():
 
         batches = len(to_iter) / self.batch_size
         for batch in range(int(batches) - 1):
-            data = [var(to_iter)[i] for i in range(batch * self.batch_size, -1 + (batch + 1) * self.batch_size)]
+            data = [vars(to_iter)[i] for i in range(batch * self.batch_size, -1 + (batch + 1) * self.batch_size)]
             yield data
 
     def get_vocab(self):
