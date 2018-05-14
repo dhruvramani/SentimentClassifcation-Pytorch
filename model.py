@@ -1,19 +1,21 @@
 import torch
 from dataset import SST_Data
 import torch.nn.functional as F
+from embedding import WordEmbedding
 from torch.autograd import Variable
 
 class ConvNLP(torch.nn.Module):
 
-    def __init__(self, voc_size, no_classes):
+    def __init__(self, vocab, no_classes):
         super(ConvNLP, self).__init__()
 
-        self.voc_size = voc_size
+        self.vocab = vocab
+        self.voc_size = len(vocab)
         self.no_classes = no_classes
         self.embedding_dim = 128
         self.conv_dim = 100
 
-        self.embedding = torch.nn.Embedding(self.voc_size, self.embedding_dim)
+        self.embedding = WordEmbedding(self.vocab, self.embedding_dim)
 
         self.conv1 = torch.nn.Conv2d(1, self.conv_dim, [3, embedding_dim], (2, 0))
         self.conv2 = torch.nn.Conv2d(1, self.conv_dim, [4, embedding_dim], (3, 0))
@@ -24,7 +26,7 @@ class ConvNLP(torch.nn.Module):
         self.fc3 = torch.nn.Linear(100, self.no_classes)
 
     def forward(self, X):
-        embedding = self.embedding(X)
+        embedding = self.embedding.embedAndPack(X, batch_first=True)
         embedding = torch.unsqueeze(embedding, 1)  # Channels is second dim, not last
 
         act1 = F.relu(self.conv1(embedding))
@@ -54,8 +56,8 @@ if __name__ == '__main__':
     data = next(data)[0]["text"]
 
     print(data)
-    sentence = torch.LongTensor(data)
-    print(sentence)
+    #sentence = torch.LongTensor(data)
+    #print(sentence)
     sentence = Variable(sentence, requires_grad=False)
-    model = ConvNLP(dummy.get_vocab_shape()[0], 5)
+    model = ConvNLP(dummy.get_vocab(), 5)
     print(model.forward(sentence))

@@ -45,7 +45,7 @@ class SST_Data():
         return self.TEXT.vocab
 
     def get_vocab_shape(self):
-        return len(self.TEXT.vocab) ,self.TEXT.vocab.vectors.size()
+        return len(self.TEXT.vocab), self.TEXT.vocab.vectors.size()
 
 if __name__ == '__main__':
     foo = SST_Data()
