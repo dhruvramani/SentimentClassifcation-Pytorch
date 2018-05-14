@@ -33,6 +33,11 @@ class SST_Data():
         self.TEXT.vocab.extend(f)
         self.LABEL.build_vocab(self.train)
 
+        self.train_iter, self.val_iter, self.test_iter = data.BucketIterator.splits(
+            (self.train, self.val, self.test), batch_size=self.batch_size, device=0)
+
+
+    '''
     def get_data(self, ttype):
         to_iter = {"train" : self.train, "val" : self.val, "test" : self.test}[ttype]
 
@@ -40,6 +45,15 @@ class SST_Data():
         for batch in range(int(batches) - 1):
             data = [vars(to_iter[i]) for i in range(batch * self.batch_size, (batch + 1) * self.batch_size)]
             yield data
+    '''
+
+    def get_data(self, ttype):
+        to_iter = {"train" : self.train_iter, "val" : self.val_iter, "test" : self.test_iter}[ttype]
+
+        for batch in to_iter:
+            X, Y = batch.text, batch.label
+            print(X.size(), Y.size())
+            yield X, Y
 
     def get_vocab(self):
         return self.TEXT.vocab
@@ -50,4 +64,4 @@ class SST_Data():
 if __name__ == '__main__':
     foo = SST_Data()
     data = foo.get_data("train")
-    print(next(data)[0]["text"])
+    print(next(data)[0])
