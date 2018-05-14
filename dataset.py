@@ -34,7 +34,7 @@ class SST_Data():
         self.LABEL.build_vocab(self.train)
 
         self.train_iter, self.val_iter, self.test_iter = data.BucketIterator.splits(
-            (self.train, self.val, self.test), batch_size=self.batch_size, device=0)
+            (self.train, self.val, self.test), batch_size=self.batch_size, device=1)
 
 
     '''
