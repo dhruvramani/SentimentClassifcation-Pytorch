@@ -17,9 +17,9 @@ class ConvNLP(torch.nn.Module):
 
         self.embedding = WordEmbedding(self.vocab, self.embedding_dim)
 
-        self.conv1 = torch.nn.Conv2d(1, self.conv_dim, [3, embedding_dim], (2, 0))
-        self.conv2 = torch.nn.Conv2d(1, self.conv_dim, [4, embedding_dim], (3, 0))
-        self.conv3 = torch.nn.Conv2d(1, self.conv_dim, [5, embedding_dim], (4, 0))
+        self.conv1 = torch.nn.Conv2d(1, self.conv_dim, [3, self.embedding_dim], (2, 0))
+        self.conv2 = torch.nn.Conv2d(1, self.conv_dim, [4, self.embedding_dim], (3, 0))
+        self.conv3 = torch.nn.Conv2d(1, self.conv_dim, [5, self.embedding_dim], (4, 0))
 
         self.fc1 = torch.nn.Dropout(torch.nn.Linear(self.conv_dim * 3, 200))
         self.fc2 = torch.nn.Dropout(torch.nn.Linear(200, 100))
