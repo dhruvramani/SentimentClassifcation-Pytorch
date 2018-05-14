@@ -21,8 +21,9 @@ class ConvNLP(torch.nn.Module):
         self.conv2 = torch.nn.Conv2d(1, self.conv_dim, [4, self.embedding_dim], (3, 0))
         self.conv3 = torch.nn.Conv2d(1, self.conv_dim, [5, self.embedding_dim], (4, 0))
 
-        self.fc1 = torch.nn.Dropout(torch.nn.Linear(self.conv_dim * 3, 200))
-        self.fc2 = torch.nn.Dropout(torch.nn.Linear(200, 100))
+        self.dropout = torch.nn.Dropout(p=0.2)
+        self.fc1 = torch.nn.Linear(self.conv_dim * 3, 200)
+        self.fc2 = torch.nn.Linear(200, 100)
         self.fc3 = torch.nn.Linear(100, self.no_classes)
 
     def forward(self, X):
@@ -42,8 +43,8 @@ class ConvNLP(torch.nn.Module):
         acts = torch.cat(acts, 2)
         acts = acts.view(acts.size(0), -1) # [batch_size, self.conv_dim * 3]
 
-        act1 = self.fc1(acts)
-        act2 = self.fc2(act1)
+        act1 = self.dropout(self.fc1(acts))
+        act2 = self.dropout(self.fc2(act1))
         act3 = self.fc3(act2)
         y_pred = F.softmax(act3)
         classes = torch.max(y_pred, 1)[1]
