@@ -58,6 +58,6 @@ if __name__ == '__main__':
     print(data)
     #sentence = torch.LongTensor(data)
     #print(sentence)
-    sentence = Variable(sentence, requires_grad=False)
+    #sentence = Variable(sentence, requires_grad=False)
     model = ConvNLP(dummy.get_vocab(), 5)
-    print(model.forward(sentence))
+    print(model.forward(data))
