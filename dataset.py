@@ -51,5 +51,5 @@ class SST_Data():
 
 if __name__ == '__main__':
     foo = SST_Data()
-    X, Y = foo.get_data("train")
-    print(next(X)[0], next(Y)[0])
+    X = foo.get_data("train")
+    print(next(X[0])[0], next(X[1])[0])
