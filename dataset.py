@@ -52,4 +52,4 @@ class SST_Data():
 if __name__ == '__main__':
     foo = SST_Data()
     for X, Y in foo.get_data("train"):
-        print(X[0], Y[0])
+        print(X, Y)
