@@ -1,13 +1,13 @@
 import torch 
 from model import ConvNLP
-from dataset import Dataset
+from dataset import SST_Data
 from torch.autograd import Variable
 
-_FILE_PATH = 
-
 def train():
-    learning_rate, epochs, curr_epoch, curr_step = 1e-4, 300, 0, 0
-    model = ConvNLP(128, Y.shape[1]) # TODO : Change
+    learning_rate, epochs, curr_epoch, curr_step = 1e-4, 10, 0, 0
+    dataobj = SST_Data()
+    #data = dummy.get_data("train")
+    model = ConvNLP(dataobj.get_vocab(), 5) # No. classes for SST
     
     loss_func = torch.nn.CrossEntropyLoss()
     optim =  torch.optim.AdamOptimizer(lr=learning_rate)
